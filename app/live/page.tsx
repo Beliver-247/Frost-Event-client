@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useMemo, useState } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { getSupabaseClient } from '../../lib/supabaseClient'
 import { format } from 'date-fns'
 import clsx from 'clsx'
@@ -19,6 +20,7 @@ export default function LivePage() {
   const [updatedAt, setUpdatedAt] = useState<string | null>(null)
   const [fontSize, setFontSize] = useState<'s' | 'm' | 'l'>('m')
   const [autoScroll, setAutoScroll] = useState<boolean>(false)
+  const shouldReduceMotion = useReducedMotion()
 
   const classSize = useMemo(() => ({ s: 'text-base', m: 'text-lg', l: 'text-xl sm:text-2xl' })[fontSize], [fontSize])
 
@@ -104,29 +106,60 @@ export default function LivePage() {
         </div>
       </header>
       <section className={clsx('rounded-xl p-5 bg-slate-900/70 shadow-glow', classSize)}>
-        {item ? (
-          <div>
-            <h2
-              className={clsx('text-brand-gold font-bold text-2xl mb-3', {
-                'text-left': item.text_align === 'left' || !item.text_align,
-                'text-center': item.text_align === 'center',
-                'text-justify': item.text_align === 'justify',
-              })}
+        <AnimatePresence mode="popLayout">
+          {item ? (
+            <motion.div
+              key={item.id}
+              initial={shouldReduceMotion ? undefined : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
             >
-              {item.title}
-            </h2>
-            <article
-              className={clsx('whitespace-pre-wrap leading-relaxed tracking-wide text-slate-100', {
-                'text-left': item.text_align === 'left' || !item.text_align,
-                'text-center': item.text_align === 'center',
-                'text-justify': item.text_align === 'justify',
-              })}
-              dangerouslySetInnerHTML={{ __html: renderContent(item.content) }}
-            />
-          </div>
-        ) : (
-          <p className="text-slate-400">Waiting for the show to start…</p>
-        )}
+              <h2
+                className={clsx('text-brand-gold font-bold text-2xl mb-3', {
+                  'text-left': item.text_align === 'left' || !item.text_align,
+                  'text-center': item.text_align === 'center',
+                  'text-justify': item.text_align === 'justify',
+                })}
+              >
+                <motion.span
+                  initial={shouldReduceMotion ? undefined : { opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                >
+                  {item.title}
+                </motion.span>
+              </h2>
+              <article
+                className={clsx('whitespace-pre-wrap leading-relaxed tracking-wide text-slate-100', {
+                  'text-left': item.text_align === 'left' || !item.text_align,
+                  'text-center': item.text_align === 'center',
+                  'text-justify': item.text_align === 'justify',
+                })}
+              >
+                <motion.div
+                  initial={shouldReduceMotion ? undefined : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.35, ease: 'easeOut', delay: shouldReduceMotion ? 0 : 0.05 }}
+                >
+                  <div dangerouslySetInnerHTML={{ __html: renderContent(item.content) }} />
+                </motion.div>
+              </article>
+            </motion.div>
+          ) : (
+            <p className="text-slate-400">
+              <motion.span
+                key="waiting"
+                initial={shouldReduceMotion ? undefined : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={shouldReduceMotion ? undefined : { opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                Waiting for the show to start…
+              </motion.span>
+            </p>
+          )}
+        </AnimatePresence>
       </section>
     </div>
   )
