@@ -1,0 +1,23 @@
+[
+  {
+    "order_index": 1,
+    "title": "Opening Carol: Joy to the World",
+    "type": "song",
+    "language": "en",
+    "content": "Joy to the world! The Lord is come;\nLet earth receive her King;\nLet every heart prepare Him room..."
+  },
+  {
+    "order_index": 2,
+    "title": "Welcome Address",
+    "type": "speech",
+    "language": "en",
+    "content": "Welcome everyone to Frost Carols Night. We are delighted to have you..."
+  },
+  {
+    "order_index": 3,
+    "title": "සිල් හදන කලු පණ",
+    "type": "song",
+    "language": "si",
+    "content": "සිල් හදන කලු පණ... (lyrics go here)"
+  }
+]

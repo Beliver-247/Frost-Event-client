@@ -1,0 +1,39 @@
+# Node
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js
+.next
+out
+.next.cache
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs
+*.pid
+*.seed
+*.pid.lock
+
+# macOS
+.DS_Store
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# Supabase
+supabase/.branches
+supabase/.temp
+
+# Local data overrides
+/data/items.json
