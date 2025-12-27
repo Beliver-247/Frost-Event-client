@@ -1,14 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+// Ensure these resolve to strings for type-checking during Next build
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
+const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 
 if (!url || !anon) {
   console.error('Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY')
   process.exit(1)
 }
 
-const CONCURRENCY = 100
+const CONCURRENCY = 200
 
 async function simulateAudienceRead(userIdx: number) {
   const supabase = createClient(url, anon)
