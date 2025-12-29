@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed:items": "ts-node scripts/importItems.ts"
+    "seed:items": "ts-node scripts/importItems.ts",
+    "test:load": "ts-node scripts/loadTest.ts"
   },
   "dependencies": {
     "@supabase/ssr": "0.4.0",

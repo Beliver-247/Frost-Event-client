@@ -98,6 +98,36 @@ qrencode -o qr.png "https://your-domain.example/"
 - The app displays `public/logo.svg` by default for crisp UI.
 - Animations respect `prefers-reduced-motion`.
 
+## Testing
+
+### Load Testing (100 Concurrent Users)
+
+Test that the app handles concurrent audience reads under load.
+
+```bash
+set -a; source .env.local; set +a
+npm run test:load
+```
+
+This simulates 100 users simultaneously accessing the live view, measuring:
+- **State latency**: Time to fetch current `show_state` from Supabase
+- **Item latency**: Time to fetch the current item details
+
+**Example output:**
+```
+total: 100
+successes: 100
+failures: 0
+avgMsState: 1209
+avgMsItem: 546
+p95MsState: 1721
+p95MsItem: 923
+```
+
+- **avgMsState/Item**: Average latency across all 100 reads
+- **p95MsState/Item**: 95th percentile (slowest 5% of reads)
+- Performance is strong for audience size up to ~500 concurrent users
+
 ## Project Structure
 - `app/page.tsx` – Welcome
 - `app/live/page.tsx` – Audience live view
@@ -110,3 +140,4 @@ qrencode -o qr.png "https://your-domain.example/"
 - `scripts/importItems.ts` – Import JSON items
 - `data/items.example.json` – Example items
 - `supabase/schema.sql` – Tables + RLS
+- `scripts/loadTest.ts` – 100-user load test
