@@ -12,6 +12,7 @@ export function Header() {
           </div>
         </Link>
         <nav className="flex items-center gap-3 text-sm">
+          <Link href="/agenda" className="px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/15 transition-colors">Agenda</Link>
           <Link href="/live" className="px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/15 transition-colors">Enter Live</Link>
           <Link href="/admin" className="px-3 py-1.5 rounded-md bg-brand-blue/70 hover:bg-brand-blue transition-colors">Admin</Link>
         </nav>

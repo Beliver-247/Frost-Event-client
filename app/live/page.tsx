@@ -1,5 +1,6 @@
 "use client"
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { getSupabaseClient } from '../../lib/supabaseClient'
 import { format } from 'date-fns'
@@ -15,7 +16,10 @@ type Item = {
   text_align?: 'left' | 'center' | 'justify'
 }
 
-export default function LivePage() {
+function LivePageContent() {
+  const searchParams = useSearchParams()
+  const preselectedItemId = searchParams.get('itemId')
+  
   const [item, setItem] = useState<Item | null>(null)
   const [updatedAt, setUpdatedAt] = useState<string | null>(null)
   const [fontSize, setFontSize] = useState<'s' | 'm' | 'l'>('m')
@@ -45,6 +49,21 @@ export default function LivePage() {
 
   async function fetchCurrent() {
     const supabase = getSupabaseClient()
+    
+    // If itemId is specified in query params, fetch that specific item
+    if (preselectedItemId) {
+      const { data: it } = await supabase.from('items').select('*').eq('id', preselectedItemId).single()
+      if (it) {
+        setItem(it)
+        try { if (typeof window !== 'undefined') localStorage.setItem('lastItem', JSON.stringify(it)) } catch {}
+        if (autoScroll) {
+          setTimeout(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, 50)
+        }
+      }
+      return
+    }
+    
+    // Otherwise, fetch the current live item from show_state
     const { data: state, error: stateErr } = await supabase.from('show_state').select('*').eq('id', 1).single()
     if (stateErr) return
     if (state?.updated_at) setUpdatedAt(state.updated_at)
@@ -71,6 +90,11 @@ export default function LivePage() {
 
     fetchCurrent()
 
+    // Only subscribe to realtime updates if NOT viewing a preselected item
+    if (preselectedItemId) {
+      return
+    }
+
     const channel = getSupabaseClient()
       .channel('public:show_state')
       .on(
@@ -83,7 +107,7 @@ export default function LivePage() {
       .subscribe()
 
     return () => { getSupabaseClient().removeChannel(channel) }
-  }, [autoScroll])
+  }, [autoScroll, preselectedItemId])
 
   return (
     <div className="space-y-6">
@@ -162,5 +186,13 @@ export default function LivePage() {
         </AnimatePresence>
       </section>
     </div>
+  )
+}
+
+export default function LivePage() {
+  return (
+    <Suspense fallback={<p className="text-center text-slate-400">Loading…</p>}>
+      <LivePageContent />
+    </Suspense>
   )
 }
