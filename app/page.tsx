@@ -3,20 +3,9 @@ import AnimatedBackground from '../components/AnimatedBackground'
 import { motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
 
 export default function WelcomePage() {
   const shouldReduceMotion = useReducedMotion()
-  const [redirecting, setRedirecting] = useState(false)
-  const timerRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    timerRef.current = window.setTimeout(() => {
-      setRedirecting(true)
-      window.location.assign('/live')
-    }, 3000)
-    return () => { if (timerRef.current) window.clearTimeout(timerRef.current) }
-  }, [])
 
   return (
     <div className="relative overflow-hidden">
@@ -47,19 +36,14 @@ export default function WelcomePage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Link href="/live" className="px-6 py-3 rounded-lg bg-brand-blue text-white shadow-glow hover:bg-brand-blue/90 transition-colors">Enter Live Lyrics</Link>
+            <Link href="/live" className="px-6 py-3 rounded-lg bg-brand-blue text-white shadow-glow hover:bg-brand-blue/90 transition-colors">Enter Live</Link>
           </motion.div>
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <button
-              onClick={() => { if (timerRef.current) { window.clearTimeout(timerRef.current); timerRef.current = null; setRedirecting(false) } }}
-              className="px-4 py-3 rounded-lg bg-white/10 hover:bg-white/15 transition-colors"
-            >
-              {redirecting ? 'Cancel' : 'Skip'}
-            </button>
+            <Link href="/agenda" className="px-6 py-3 rounded-lg bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors shadow-glow">View Agenda</Link>
           </motion.div>
         </div>
       </div>
