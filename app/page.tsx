@@ -26,10 +26,10 @@ export default function WelcomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Frost Carols Night
+            Frost 25'
           </motion.span>
         </h1>
-        <p className="mt-2 text-slate-300">December 26, 2025 · 7:00 PM</p>
+        <p className="mt-2 text-slate-300">January 05, 2026 · 5:30 PM</p>
         <div className="mt-8 flex items-center justify-center gap-4">
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0 }}
