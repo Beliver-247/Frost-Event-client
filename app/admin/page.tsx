@@ -105,10 +105,13 @@ export default function AdminPage() {
 
       <ul className="divide-y divide-slate-800 rounded-xl overflow-hidden border border-slate-800">
         {filtered.map(i => (
-          <li key={i.id} className={`p-4 cursor-pointer hover:bg-white/05 ${currentId === i.id ? 'bg-brand-blue/20' : ''}`} onClick={() => setLive(i.id)}>
+          <li key={i.id} className={`p-4 cursor-pointer hover:bg-white/05 ${currentId === i.id ? 'bg-brand-blue/20 border-l-4 border-brand-gold' : ''}`} onClick={() => setLive(i.id)}>
             <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium">{i.title}</div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <div className="font-medium">{i.title}</div>
+                  {currentId === i.id && <span className="text-xs px-2 py-0.5 rounded bg-brand-gold text-slate-900 font-semibold">LIVE NOW</span>}
+                </div>
                 <div className="text-xs text-slate-400">{i.type} · {i.language} · #{i.order_index}</div>
               </div>
               <button className="px-3 py-1.5 rounded bg-brand-gold/20 hover:bg-brand-gold/30">Set Live</button>
