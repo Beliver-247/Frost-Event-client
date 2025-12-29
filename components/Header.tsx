@@ -8,7 +8,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-3">
           <Image src="/logo.svg" alt="Event Logo" width={36} height={36} priority />
           <div className="text-lg font-semibold tracking-wide">
-            <span className="text-brand-gold">Frost</span> Carols 2025
+            <span className="text-brand-gold">SLIIT</span> Frost 
           </div>
         </Link>
         <nav className="flex items-center gap-3 text-sm">
