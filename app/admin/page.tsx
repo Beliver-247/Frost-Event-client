@@ -68,6 +68,11 @@ export default function AdminPage() {
     if (next) setLive(next.id)
   }
 
+  async function handleLogout() {
+    await getSupabaseClient().auth.signOut()
+    window.location.href = '/login'
+  }
+
   if (authorized === false) {
     return (
       <div className="max-w-md mx-auto bg-slate-900/70 rounded-xl p-6 shadow-glow">
@@ -89,6 +94,7 @@ export default function AdminPage() {
           <button onClick={() => gotoNextPrev(-1)} className="px-3 py-2 rounded bg-white/10 hover:bg-white/15">Previous</button>
           <button onClick={() => gotoNextPrev(1)} className="px-3 py-2 rounded bg-white/10 hover:bg-white/15">Next</button>
           <Link href="/live" target="_blank" className="px-3 py-2 rounded bg-brand-blue hover:bg-brand-blue/90">Preview Live</Link>
+          <button onClick={handleLogout} className="px-3 py-2 rounded bg-rose-600 hover:bg-rose-700 transition-colors">Logout</button>
         </div>
       </div>
 
