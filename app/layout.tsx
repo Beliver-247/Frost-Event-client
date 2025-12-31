@@ -3,8 +3,12 @@ import type { Metadata } from 'next'
 import { Header } from '../components/Header'
 
 export const metadata: Metadata = {
-  title: 'Carols Live',
+  title: 'Frost 25',
   description: 'Live lyrics and items for the carols show',
+  icons: {
+    icon: '/Frost Logo - 2025 Gold.png',
+    apple: '/Frost Logo - 2025 Gold.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
