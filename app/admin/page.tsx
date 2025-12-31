@@ -87,15 +87,17 @@ export default function AdminPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Admin Dashboard</h1>
-        <div className="flex gap-2">
-          <Link href="/admin/items" className="px-3 py-2 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors">Manage Items</Link>
-          <Link href="/admin/analytics" className="px-3 py-2 rounded bg-purple-600 hover:bg-purple-700 transition-colors">Analytics</Link>
-          <button onClick={() => gotoNextPrev(-1)} className="px-3 py-2 rounded bg-white/10 hover:bg-white/15">Previous</button>
-          <button onClick={() => gotoNextPrev(1)} className="px-3 py-2 rounded bg-white/10 hover:bg-white/15">Next</button>
-          <Link href="/live" target="_blank" className="px-3 py-2 rounded bg-brand-blue hover:bg-brand-blue/90">Preview Live</Link>
-          <button onClick={handleLogout} className="px-3 py-2 rounded bg-rose-600 hover:bg-rose-700 transition-colors">Logout</button>
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h1 className="text-xl font-semibold">Admin Dashboard</h1>
+          <button onClick={handleLogout} className="px-3 py-2 rounded bg-rose-600 hover:bg-rose-700 transition-colors text-sm">Logout</button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/admin/items" className="px-3 py-2 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors text-sm">Manage Items</Link>
+          <Link href="/admin/analytics" className="px-3 py-2 rounded bg-purple-600 hover:bg-purple-700 transition-colors text-sm">Analytics</Link>
+          <button onClick={() => gotoNextPrev(-1)} className="px-3 py-2 rounded bg-white/10 hover:bg-white/15 text-sm">Previous</button>
+          <button onClick={() => gotoNextPrev(1)} className="px-3 py-2 rounded bg-white/10 hover:bg-white/15 text-sm">Next</button>
+          <Link href="/live" target="_blank" className="px-3 py-2 rounded bg-brand-blue hover:bg-brand-blue/90 text-sm">Preview Live</Link>
         </div>
       </div>
 
