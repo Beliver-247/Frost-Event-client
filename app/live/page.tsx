@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { getSupabaseClient } from '../../lib/supabaseClient'
+import { trackPageView } from '../../lib/analytics'
 import { format } from 'date-fns'
 import clsx from 'clsx'
 
@@ -41,6 +42,8 @@ function LivePageContent() {
       const f = localStorage.getItem('fontSize') as 's' | 'm' | 'l' | null
       if (f) setFontSize(f)
     }
+    // Track page view
+    trackPageView('/live')
   }, [])
 
   async function fetchCurrent() {

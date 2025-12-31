@@ -122,8 +122,8 @@ export default function ItemsManagerPage() {
       setError('Title is required')
       return
     }
-    if (!editing.content.trim()) {
-      setError('Content is required')
+    if (editing.type === 'song' && !editing.content.trim()) {
+      setError('Content is required for songs')
       return
     }
     if (editing.order_index < 1) {
