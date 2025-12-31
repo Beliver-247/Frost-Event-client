@@ -11,25 +11,25 @@ export default function WelcomePage() {
     <div className="relative overflow-hidden">
       <AnimatedBackground />
       <div className="mx-auto max-w-3xl text-center pt-10 pb-16">
-        <div className="mx-auto mb-6">
+        <div className="mx-auto mb-6 flex justify-center">
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
           >
-            <Image src="/logo.svg" alt="Event Logo" width={160} height={160} priority className="drop-shadow" />
+            <Image src="/Frost Logo - 2025 Gold.png" alt="Event Logo" width={400} height={200} priority className="drop-shadow" />
           </motion.div>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
+        {/* <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
           <motion.span
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Frost 25'
+            SLIIT Frost'25
           </motion.span>
         </h1>
-        <p className="mt-2 text-slate-300">January 05, 2026 · 5:30 PM</p>
+        <p className="mt-2 text-slate-300">January 05, 2026 · 5:30 PM</p> */}
         <div className="mt-8 flex items-center justify-center gap-4">
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0 }}
