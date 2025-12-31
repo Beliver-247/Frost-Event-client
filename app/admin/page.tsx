@@ -19,6 +19,7 @@ export default function AdminPage() {
   const [query, setQuery] = useState('')
   const [currentId, setCurrentId] = useState<string | null>(null)
   const [health, setHealth] = useState<{ ok: boolean; error?: string } | null>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -90,9 +91,35 @@ export default function AdminPage() {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold">Admin Dashboard</h1>
-          <button onClick={handleLogout} className="px-3 py-2 rounded bg-rose-600 hover:bg-rose-700 transition-colors text-sm">Logout</button>
+          <div className="flex items-center gap-2">
+            {/* Mobile hamburger menu */}
+            <div className="relative md:hidden">
+              <button 
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="px-3 py-2 rounded bg-white/10 hover:bg-white/15 transition-colors"
+                aria-label="Menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+              {menuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-lg shadow-xl z-50">
+                  <div className="py-1">
+                    <Link href="/admin/items" className="block px-4 py-2 hover:bg-white/10 text-sm">Manage Items</Link>
+                    <Link href="/admin/analytics" className="block px-4 py-2 hover:bg-white/10 text-sm">Analytics</Link>
+                    <Link href="/live" target="_blank" className="block px-4 py-2 hover:bg-white/10 text-sm">Preview Live</Link>
+                    <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-white/10 text-sm text-rose-400">Logout</button>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Desktop logout button */}
+            <button onClick={handleLogout} className="hidden md:block px-3 py-2 rounded bg-rose-600 hover:bg-rose-700 transition-colors text-sm">Logout</button>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2">
+        {/* Desktop buttons */}
+        <div className="hidden md:flex flex-wrap gap-2">
           <Link href="/admin/items" className="px-3 py-2 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors text-sm">Manage Items</Link>
           <Link href="/admin/analytics" className="px-3 py-2 rounded bg-purple-600 hover:bg-purple-700 transition-colors text-sm">Analytics</Link>
           <Link href="/live" target="_blank" className="px-3 py-2 rounded bg-brand-blue hover:bg-brand-blue/90 text-sm">Preview Live</Link>
@@ -103,6 +130,19 @@ export default function AdminPage() {
           </button>
           <button onClick={() => gotoNextPrev(1)} className="px-3 py-2 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors" title="Next">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
+            </svg>
+          </button>
+        </div>
+        {/* Mobile next/previous buttons */}
+        <div className="flex md:hidden gap-2 justify-center">
+          <button onClick={() => gotoNextPrev(-1)} className="px-4 py-3 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors" title="Previous">
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
+            </svg>
+          </button>
+          <button onClick={() => gotoNextPrev(1)} className="px-4 py-3 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors" title="Next">
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
             </svg>
           </button>
