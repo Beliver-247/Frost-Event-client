@@ -96,14 +96,14 @@ export default function AdminPage() {
           <Link href="/admin/items" className="px-3 py-2 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors text-sm">Manage Items</Link>
           <Link href="/admin/analytics" className="px-3 py-2 rounded bg-purple-600 hover:bg-purple-700 transition-colors text-sm">Analytics</Link>
           <Link href="/live" target="_blank" className="px-3 py-2 rounded bg-brand-blue hover:bg-brand-blue/90 text-sm">Preview Live</Link>
-          <button onClick={() => gotoNextPrev(-1)} className="px-3 py-2 rounded bg-brand-gold/80 hover:bg-brand-gold text-slate-900 font-semibold transition-colors" title="Previous">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M11 6L5 12L11 18V6ZM13 6V18L19 12L13 6Z" />
+          <button onClick={() => gotoNextPrev(-1)} className="px-3 py-2 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors" title="Previous">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
             </svg>
           </button>
-          <button onClick={() => gotoNextPrev(1)} className="px-3 py-2 rounded bg-brand-gold/80 hover:bg-brand-gold text-slate-900 font-semibold transition-colors" title="Next">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M13 6V18L19 12L13 6ZM11 18V6L5 12L11 18Z" />
+          <button onClick={() => gotoNextPrev(1)} className="px-3 py-2 rounded bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors" title="Next">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
             </svg>
           </button>
         </div>
