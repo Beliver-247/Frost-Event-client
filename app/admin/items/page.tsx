@@ -365,9 +365,9 @@ export default function ItemsManagerPage() {
             <tr>
               <th className="px-4 py-3 text-xs font-medium text-slate-400">Order</th>
               <th className="px-4 py-3 text-xs font-medium text-slate-400">Title</th>
-              <th className="px-4 py-3 text-xs font-medium text-slate-400">Type</th>
-              <th className="px-4 py-3 text-xs font-medium text-slate-400">Lang</th>
-              <th className="px-4 py-3 text-xs font-medium text-slate-400">Align</th>
+              <th className="hidden sm:table-cell px-4 py-3 text-xs font-medium text-slate-400">Type</th>
+              <th className="hidden md:table-cell px-4 py-3 text-xs font-medium text-slate-400">Lang</th>
+              <th className="hidden lg:table-cell px-4 py-3 text-xs font-medium text-slate-400">Align</th>
               <th className="px-4 py-3 text-xs font-medium text-slate-400">Actions</th>
             </tr>
           </thead>
@@ -375,14 +375,17 @@ export default function ItemsManagerPage() {
             {items.map(item => (
               <tr key={item.id} className="hover:bg-white/5">
                 <td className="px-4 py-3 text-sm">{item.order_index}</td>
-                <td className="px-4 py-3 font-medium">{item.title}</td>
-                <td className="px-4 py-3 text-sm text-slate-400">{item.type}</td>
-                <td className="px-4 py-3 text-sm text-slate-400">{item.language}</td>
-                <td className="px-4 py-3 text-sm text-slate-400">{item.text_align || 'left'}</td>
+                <td className="px-4 py-3">
+                  <div className="font-medium">{item.title}</div>
+                  <div className="text-xs text-slate-400 sm:hidden">{item.type} · {item.language}</div>
+                </td>
+                <td className="hidden sm:table-cell px-4 py-3 text-sm text-slate-400">{item.type}</td>
+                <td className="hidden md:table-cell px-4 py-3 text-sm text-slate-400">{item.language}</td>
+                <td className="hidden lg:table-cell px-4 py-3 text-sm text-slate-400">{item.text_align || 'left'}</td>
                 <td className="px-4 py-3 text-sm">
                   <div className="flex gap-2">
-                    <button onClick={() => openEdit(item)} className="px-2 py-1 rounded bg-blue-500/20 hover:bg-blue-500/30 text-blue-200">Edit</button>
-                    <button onClick={() => deleteItem(item.id)} className="px-2 py-1 rounded bg-rose-500/20 hover:bg-rose-500/30 text-rose-200">Delete</button>
+                    <button onClick={() => openEdit(item)} className="px-2 py-1 rounded bg-blue-500/20 hover:bg-blue-500/30 text-blue-200 text-xs sm:text-sm">Edit</button>
+                    <button onClick={() => deleteItem(item.id)} className="px-2 py-1 rounded bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 text-xs sm:text-sm">Del</button>
                   </div>
                 </td>
               </tr>
