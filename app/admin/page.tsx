@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useMemo, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { getSupabaseClient } from '../../lib/supabaseClient'
 import { isAllowedAdmin } from '../../lib/isAllowedAdmin'
 import Link from 'next/link'
@@ -103,16 +104,25 @@ export default function AdminPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
-              {menuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-lg shadow-xl z-50">
-                  <div className="py-1">
-                    <Link href="/admin/items" className="block px-4 py-2 hover:bg-white/10 text-sm">Manage Items</Link>
-                    <Link href="/admin/analytics" className="block px-4 py-2 hover:bg-white/10 text-sm">Analytics</Link>
-                    <Link href="/live" target="_blank" className="block px-4 py-2 hover:bg-white/10 text-sm">Preview Live</Link>
-                    <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-white/10 text-sm text-rose-400">Logout</button>
-                  </div>
-                </div>
-              )}
+              <AnimatePresence>
+                {menuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                  >
+                    <div className="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-lg shadow-xl z-50">
+                      <div className="py-1">
+                        <Link href="/admin/items" className="block px-4 py-2 hover:bg-white/10 text-sm">Manage Items</Link>
+                        <Link href="/admin/analytics" className="block px-4 py-2 hover:bg-white/10 text-sm">Analytics</Link>
+                        <Link href="/live" target="_blank" className="block px-4 py-2 hover:bg-white/10 text-sm">Preview Live</Link>
+                        <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-white/10 text-sm text-rose-400">Logout</button>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             {/* Desktop logout button */}
             <button onClick={handleLogout} className="hidden md:block px-3 py-2 rounded bg-rose-600 hover:bg-rose-700 transition-colors text-sm">Logout</button>
