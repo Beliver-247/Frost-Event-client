@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { getSupabaseClient } from '../../lib/supabaseClient'
+import { trackPageView } from '../../lib/analytics'
 
 type Item = {
   id: string
@@ -21,6 +22,9 @@ export default function AgendaPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Track page view
+    trackPageView('/agenda')
+    
     const loadData = async () => {
       // Load all items
       const { data: itemsList } = await getSupabaseClient()
