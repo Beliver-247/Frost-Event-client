@@ -52,6 +52,11 @@ export default function ItemsManagerPage() {
     setItems(data || [])
   }
 
+  async function handleLogout() {
+    await getSupabaseClient().auth.signOut()
+    window.location.href = '/login'
+  }
+
   function openNew() {
     const maxOrder = items.length ? Math.max(...items.map(i => i.order_index)) : 0
     setEditing({ ...emptyForm, order_index: maxOrder + 1 })
@@ -237,6 +242,7 @@ export default function ItemsManagerPage() {
         <div className="flex gap-2">
           <Link href="/admin" className="px-3 py-2 rounded bg-white/10 hover:bg-white/15">← Back to Dashboard</Link>
           <button onClick={openNew} className="px-4 py-2 rounded bg-brand-gold/80 hover:bg-brand-gold">+ Add Item</button>
+          <button onClick={handleLogout} className="px-3 py-2 rounded bg-rose-600 hover:bg-rose-700 transition-colors">Logout</button>
         </div>
       </div>
 
