@@ -23,7 +23,6 @@ function LivePageContent() {
   const [item, setItem] = useState<Item | null>(null)
   const [updatedAt, setUpdatedAt] = useState<string | null>(null)
   const [fontSize, setFontSize] = useState<'s' | 'm' | 'l'>('m')
-  const [autoScroll, setAutoScroll] = useState<boolean>(false)
   const shouldReduceMotion = useReducedMotion()
 
   const classSize = useMemo(() => ({ s: 'text-base', m: 'text-lg', l: 'text-xl sm:text-2xl' })[fontSize], [fontSize])
@@ -37,13 +36,10 @@ function LivePageContent() {
   }
 
   useEffect(() => { if (typeof window !== 'undefined') localStorage.setItem('fontSize', fontSize) }, [fontSize])
-  useEffect(() => { if (typeof window !== 'undefined') localStorage.setItem('autoScroll', String(autoScroll)) }, [autoScroll])
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const f = localStorage.getItem('fontSize') as 's' | 'm' | 'l' | null
       if (f) setFontSize(f)
-      const a = localStorage.getItem('autoScroll')
-      if (a) setAutoScroll(a === 'true')
     }
   }, [])
 
@@ -56,9 +52,6 @@ function LivePageContent() {
       if (it) {
         setItem(it)
         try { if (typeof window !== 'undefined') localStorage.setItem('lastItem', JSON.stringify(it)) } catch {}
-        if (autoScroll) {
-          setTimeout(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, 50)
-        }
       }
       return
     }
@@ -72,9 +65,6 @@ function LivePageContent() {
       if (it) {
         setItem(it)
         try { if (typeof window !== 'undefined') localStorage.setItem('lastItem', JSON.stringify(it)) } catch {}
-        if (autoScroll) {
-          setTimeout(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, 50)
-        }
       }
     }
   }
@@ -107,7 +97,7 @@ function LivePageContent() {
       .subscribe()
 
     return () => { getSupabaseClient().removeChannel(channel) }
-  }, [autoScroll, preselectedItemId])
+  }, [preselectedItemId])
 
   return (
     <div className="space-y-6">
@@ -125,8 +115,6 @@ function LivePageContent() {
             <option value="m">M</option>
             <option value="l">L</option>
           </select>
-          <label className="ml-3 text-sm text-slate-300">Auto-scroll</label>
-          <input type="checkbox" checked={autoScroll} onChange={(e) => setAutoScroll(e.target.checked)} />
         </div>
       </header>
       <section className={clsx('rounded-xl p-5 bg-slate-900/70 shadow-glow', classSize)}>
