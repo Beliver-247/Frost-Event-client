@@ -1,12 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../tailwind.config.ts";
+@import "tailwindcss";
 
 :root {
-  --brand-blue: #1e3a8a; /* blue-800 */
-  --brand-gold: #f59e0b; /* amber-500 */
-  --surface: #0b1220; /* deep blue-black */
-  --surface-elevated: #111b2e;
+  --evergreen: #022c20;
+  --grey: #707a76;
+  --alabaster-grey: #dfdfdf;
+  --emerald-depths: #115d46;
+  --deep-crimson: #8f1117;
+
+  --brand-blue: var(--evergreen);
+  --brand-gold: var(--alabaster-grey);
+  --surface: var(--evergreen);
+  --surface-elevated: var(--emerald-depths);
 }
 
 html, body {
@@ -16,12 +21,38 @@ html, body {
 
 /* Animated gradient background with reduced motion respect */
 .animated-bg {
-  background-image: radial-gradient(1200px circle at 20% 0%, rgba(255, 215, 0, 0.12), transparent 40%), radial-gradient(800px circle at 80% 100%, rgba(30, 64, 175, 0.15), transparent 40%);
+  background-image: radial-gradient(1200px circle at 20% 0%, color-mix(in srgb, var(--emerald-depths) 45%, transparent), transparent 40%), radial-gradient(800px circle at 80% 100%, color-mix(in srgb, var(--deep-crimson) 28%, transparent), transparent 40%);
   background-size: 200% 200%;
   animation: subtle-gradient 30s ease infinite;
 }
 
+@keyframes hero-logo-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes hero-action-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-logo-in {
+  animation: hero-logo-in 600ms ease-out both;
+}
+
+.hero-action-in {
+  animation: hero-action-in 600ms ease-out both;
+}
+
+.hero-action-in-first { animation-delay: 200ms; }
+.hero-action-in-second { animation-delay: 300ms; }
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-logo-in,
+  .hero-action-in {
+    animation: none;
+  }
+
   .animated-bg {
     animation: none !important;
   }
@@ -40,9 +71,9 @@ html, body {
   position: absolute;
   width: 2px;
   height: 2px;
-  background: rgba(255, 215, 0, 0.6);
+  background: var(--alabaster-grey);
   border-radius: 9999px;
-  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--alabaster-grey) 50%, transparent);
   animation: sparkle 6s ease-in-out infinite;
 }
 

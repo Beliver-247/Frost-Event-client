@@ -1,24 +1,17 @@
 "use client"
 import AnimatedBackground from '../components/AnimatedBackground'
-import { motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function WelcomePage() {
-  const shouldReduceMotion = useReducedMotion()
-
   return (
     <div className="relative overflow-hidden">
       <AnimatedBackground />
       <div className="mx-auto max-w-3xl text-center pt-10 pb-16">
         <div className="mx-auto mb-6 flex justify-center">
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Image src="/Frost Logo - 2025 Gold.png" alt="Event Logo" width={400} height={200} priority className="drop-shadow" />
-          </motion.div>
+          <div className="hero-logo-in">
+            <Image src="/Frost Logo - 2025 Gold.png" alt="Event Logo" width={400} height={400} priority className="h-[400px] w-[400px] object-contain drop-shadow" />
+          </div>
         </div>
         {/* <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
           <motion.span
@@ -31,20 +24,12 @@ export default function WelcomePage() {
         </h1>
         <p className="mt-2 text-slate-300">January 05, 2026 · 5:30 PM</p> */}
         <div className="mt-8 flex items-center justify-center gap-4">
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div className="hero-action-in hero-action-in-first">
             <Link href="/live" className="px-6 py-3 rounded-lg bg-brand-blue text-white shadow-glow hover:bg-brand-blue/90 transition-colors">Enter Live</Link>
-          </motion.div>
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          </div>
+          <div className="hero-action-in hero-action-in-second">
             <Link href="/agenda" className="px-6 py-3 rounded-lg bg-brand-gold text-slate-900 font-semibold hover:bg-brand-gold/90 transition-colors shadow-glow">View Agenda</Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
