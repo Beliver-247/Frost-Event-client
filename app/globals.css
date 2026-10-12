@@ -26,7 +26,33 @@ html, body {
   animation: subtle-gradient 30s ease infinite;
 }
 
+@keyframes hero-logo-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes hero-action-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-logo-in {
+  animation: hero-logo-in 600ms ease-out both;
+}
+
+.hero-action-in {
+  animation: hero-action-in 600ms ease-out both;
+}
+
+.hero-action-in-first { animation-delay: 200ms; }
+.hero-action-in-second { animation-delay: 300ms; }
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-logo-in,
+  .hero-action-in {
+    animation: none;
+  }
+
   .animated-bg {
     animation: none !important;
   }
