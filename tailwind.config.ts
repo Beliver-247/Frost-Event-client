@@ -10,6 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        evergreen: 'var(--evergreen)',
+        grey: 'var(--grey)',
+        'alabaster-grey': 'var(--alabaster-grey)',
+        'emerald-depths': 'var(--emerald-depths)',
+        'deep-crimson': 'var(--deep-crimson)',
         brand: {
           blue: 'var(--brand-blue)',
           gold: 'var(--brand-gold)',
@@ -20,10 +25,10 @@ const config: Config = {
         }
       },
       boxShadow: {
-        glow: '0 0 24px rgba(255, 215, 0, 0.25)'
+        glow: '0 0 24px color-mix(in srgb, var(--alabaster-grey) 25%, transparent)'
       },
       backgroundImage: {
-        'gold-blue-gradient': 'radial-gradient(1200px circle at 20% 0%, rgba(255, 215, 0, 0.12), transparent 40%), radial-gradient(800px circle at 80% 100%, rgba(30, 64, 175, 0.15), transparent 40%)'
+        'gold-blue-gradient': 'radial-gradient(1200px circle at 20% 0%, color-mix(in srgb, var(--emerald-depths) 45%, transparent), transparent 40%), radial-gradient(800px circle at 80% 100%, color-mix(in srgb, var(--deep-crimson) 28%, transparent), transparent 40%)'
       },
       keyframes: {
         'subtle-gradient': {

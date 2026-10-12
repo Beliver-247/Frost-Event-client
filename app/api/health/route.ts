@@ -3,7 +3,7 @@ import { createSupabaseServer } from '../../../lib/supabaseServer'
 
 export async function GET() {
   try {
-    const supabase = createSupabaseServer()
+    const supabase = await createSupabaseServer()
     const { data, error } = await supabase
       .from('show_state')
       .select('id, updated_at')

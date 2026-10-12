@@ -13,11 +13,11 @@ export default function WelcomePage() {
       <div className="mx-auto max-w-3xl text-center pt-10 pb-16">
         <div className="mx-auto mb-6 flex justify-center">
           <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 1, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
           >
-            <Image src="/Frost Logo - 2025 Gold.png" alt="Event Logo" width={400} height={200} priority className="drop-shadow" />
+            <Image src="/Frost Logo - 2025 Gold.png" alt="Event Logo" width={400} height={400} priority className="h-[400px] w-[400px] object-contain drop-shadow" />
           </motion.div>
         </div>
         {/* <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
